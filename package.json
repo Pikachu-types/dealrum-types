@@ -1,0 +1,40 @@
+{
+  "name": "@akub/types",
+  "version": "1.0.0",
+  "description": "Shared TypeScript types and classes for akub new systems",
+  "main": "build/index.js",
+  "files": [
+    "/build"
+  ],
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean"
+  },
+  "keywords": [
+    "typescript",
+    "types",
+    "akub",
+    "classes",
+    "shared"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Buka-Drect-AB/akub-types.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Buka-Drect-AB/akub-types/issues"
+  },
+  "homepage": "https://github.com/Buka-Drect-AB/akub-types#readme",
+  "author": "Jackmay Confidence",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^24.5.2",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "nanoid": "^5.1.5"
+  }
+}
