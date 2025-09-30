@@ -19,7 +19,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Export types
 __exportStar(require("./types"), exports);
 __exportStar(require("./utils"), exports);
-__exportStar(require("./utils/password-hasher"), exports);
 // Export classes
 __exportStar(require("./classes"), exports);
 //# sourceMappingURL=index.js.map

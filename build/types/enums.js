@@ -1,53 +1,103 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.environmentType = exports.transactionType = exports.paymentStatus = exports.businessType = exports.authProvider = exports.staffRoles = exports.roles = exports.plans = exports.collections = void 0;
+exports.timeRanges = exports.range = exports.accessPermissions = exports.fundingRounds = exports.raiseInstrument = exports.customerFocus = exports.dealroomType = exports.companyStages = exports.authProvider = exports.socialLinks = exports.startupCategory = exports.collections = void 0;
 exports.collections = {
+    dealroom: "dealroom",
+    includer: "includer",
     users: "users",
-    orgs: "orgs",
-    staffs: "staffs",
-    orgRequests: "orgRequests",
-    venues: "venues", // sub document
-    accounts: "accounts", // sub document
-    subscriptions: "subscriptions",
     payments: "payments",
-    ledger: "balanceLedger", // sub document
-    transactions: "transactions",
-    payouts: "payouts",
-    customers: "customers",
-    categories: "categories",
-    terminals: "terminals",
-    inventory: "inventory", // sub document
+    questions: "questions",
+    teams: "teams",
+    companies: "companies",
+    subscriptions: "subscriptions",
+    team: "team",
+    views: "views",
+    pitchDecks: "decks",
 };
-exports.plans = {
-    basic: "basic",
-    scale: "scale",
+exports.startupCategory = {
+    software: "software",
+    hardware: "hardware",
+    other: "other",
 };
-exports.roles = {
-    owner: "owner",
-    admin: "admin",
-    supervisor: "supervisor",
-    viewer: "viewer",
-};
-exports.staffRoles = {
-    processor: "Order processor",
-    cashier: "Transaction handler",
+exports.socialLinks = {
+    linkedin: "LinkedIn",
+    facebook: "Facebook",
+    website: "Website",
+    x: "X",
+    other: "Other",
 };
 exports.authProvider = {
     email: "Email address",
     pasby: "pasby e-ID (National Identification Number)",
     pasbyMail: "pasby and email authentication"
 };
-exports.businessType = {
-    llc: "Limited company",
-    sole: "Sole trader",
+exports.companyStages = {
+    idea: "Idea stage",
+    mvp: "MVP/Seed stage",
+    product: "Product-market fit",
+    scale: "Scaling stage"
 };
-exports.paymentStatus = strEnum(['paid', 'pending', 'failed', 'refunded', 'cancelled']);
-exports.transactionType = strEnum(['credit', 'debit']);
-exports.environmentType = strEnum(['live', 'test']);
-function strEnum(o) {
-    return o.reduce((res, key) => {
-        res[key] = key;
-        return res;
-    }, Object.create(null));
-}
+exports.dealroomType = {
+    angel: "angel",
+    vc: "VC or Fund",
+};
+exports.customerFocus = {
+    b2b: "B2B",
+    b2c: "B2C",
+    b2g: "B2G",
+    b2b2c: "B2B2C",
+    b2b2b: "B2B2B",
+    c2c: "C2C",
+    b2b2c2g: "B2B2C2G",
+};
+exports.raiseInstrument = {
+    equity: "Equity",
+    safe: "SAFE",
+    convertible: "Convertible note",
+    loan: "Loan",
+    other: "Other",
+    undecided: "Undecided",
+    none: "Not interested in funding",
+};
+exports.fundingRounds = {
+    preSeed: "Pre-seed round",
+    seed: "Seed round",
+    seriesA: "Series A",
+    seriesB: "Series B",
+    seriesC: "Series C",
+    seriesD: "Series D",
+    seriesE: "Series E",
+    seriesF: "Series F",
+    ipo: "Initial Public Offering (IPO)",
+    mezzanine: "Mezzanine financing",
+    bridge: "Bridge round",
+    angel: "Angel round",
+    familyFriends: "Friends & Family round",
+    venture: "Venture round",
+    corporate: "Corporate round",
+    privateEquity: "Private Equity round",
+    debtFinancing: "Debt Financing",
+    grant: "Grant",
+    crowdfunding: "Crowdfunding"
+};
+exports.accessPermissions = {
+    member: "member",
+    admin: "admin",
+    none: "none",
+};
+const memberStatus = {
+    joined: "joined",
+    pending: "pending",
+};
+exports.range = {
+    day: "day",
+    week: "week",
+    month: "month",
+};
+exports.timeRanges = Object.keys(exports.range);
+const roles = {
+    investor: "investor",
+    founder: "founder",
+    both: "both"
+};
 //# sourceMappingURL=enums.js.map

@@ -1,7 +1,7 @@
 {
-  "name": "@akub/types",
+  "name": "@pikachu/dealrum-types",
   "version": "1.0.0",
-  "description": "Shared TypeScript types and classes for akub new systems",
+  "description": "Shared TypeScript types and classes for dealrum.com",
   "main": "build/index.js",
   "files": [
     "/build"
@@ -16,18 +16,18 @@
   "keywords": [
     "typescript",
     "types",
-    "akub",
+    "dealrum",
     "classes",
     "shared"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Buka-Drect-AB/akub-types.git"
+    "url": "git+https://github.com/Pikachu-types/dealrum-types.git"
   },
   "bugs": {
-    "url": "https://github.com/Buka-Drect-AB/akub-types/issues"
+    "url": "https://github.com/Pikachu-types/dealrum-types/issues"
   },
-  "homepage": "https://github.com/Buka-Drect-AB/akub-types#readme",
+  "homepage": "https://github.com/Pikachu-types/dealrum-types#readme",
   "author": "Jackmay Confidence",
   "license": "MIT",
   "devDependencies": {

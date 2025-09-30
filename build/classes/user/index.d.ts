@@ -1,27 +1,37 @@
-import { AuthenticationProvider } from "../..";
+import { AuthenticationProvider, SocialLinkTypes } from "../..";
 import { Model } from "../model";
 export type User = {
-    joined: Date | null | string | number;
-    lastSeen?: Date | null | string | number;
-    id: string;
     naming: {
         first: string;
         last: string;
     };
-    isNewUser: boolean;
     email: string;
     roles: {
-        client?: boolean | null;
-        consumer?: boolean | null;
+        founder?: boolean | null;
+        investor?: boolean | null;
     };
     photoUrl: string | null | undefined;
     eid?: string;
+    gptCredits?: number | null;
+    slots?: number | null;
+    dealroomSlots?: number | null;
     phone: string | null | undefined;
     security: {
         emailVerified: boolean;
         phoneVerified: boolean;
         authProvider: AuthenticationProvider;
     };
+    bio?: {
+        socials: {
+            provider: SocialLinkTypes;
+            link?: string;
+        }[];
+        about?: string | null;
+        miniBio?: string | null;
+    } | null;
+    joined: Date | null | string | number;
+    lastSeen?: Date | null | string | number;
+    id: string;
 };
 export declare class UserModel extends Model<User> {
     get accountIsValid(): boolean;
