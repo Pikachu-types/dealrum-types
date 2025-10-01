@@ -3,7 +3,6 @@
 
 export * from './dealroom/index';
 export * from './company/index';
-export * from './logs/index';
 export * from './user/index';
 export * from './team/index';
 export * from './funnel/index';

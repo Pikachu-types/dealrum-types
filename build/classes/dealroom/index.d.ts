@@ -10,7 +10,6 @@ export type Dealroom = {
     currency: string;
     location: [string, string?];
     discoverable: boolean;
-    reference: any;
     billing?: {
         email: string;
         currency: string;
