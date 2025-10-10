@@ -8,8 +8,12 @@ export declare const collections: {
     readonly companies: "companies";
     readonly subscriptions: "subscriptions";
     readonly team: "team";
+    readonly pools: "pools";
     readonly views: "views";
     readonly pitchDecks: "decks";
+    readonly investorForms: "investorForms";
+    readonly formResponses: "formResponses";
+    readonly contributionCol: (pool: string) => string;
 };
 export declare const startupCategory: {
     readonly software: "software";
@@ -97,6 +101,10 @@ declare const roles: {
     readonly founder: "founder";
     readonly both: "both";
 };
+export declare const environmentType: {
+    live: "live";
+    test: "test";
+};
 export type UserRole = keyof typeof roles;
 export type DealroomType = keyof typeof dealroomType;
 export type TimeRange = keyof typeof range;
@@ -109,4 +117,5 @@ export type StartupCategory = keyof typeof startupCategory;
 export type CompanyStage = keyof typeof companyStages;
 export type CustomerFocus = keyof typeof customerFocus;
 export type RaiseInstrument = keyof typeof raiseInstrument;
+export type EnvironmentType = keyof typeof environmentType;
 export {};

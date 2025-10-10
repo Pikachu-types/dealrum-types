@@ -8,8 +8,12 @@ export const collections = {
   companies: "companies",
   subscriptions: "subscriptions",
   team: "team",
+  pools: "pools",
   views: "views",
   pitchDecks: "decks",
+  investorForms: "investorForms",
+  formResponses: "formResponses",
+  contributionCol: (pool: string) => `pools/${pool}/contributions`,
 } as const;
 
 export const startupCategory = {
@@ -109,6 +113,9 @@ const roles = {
   both: "both"
 } as const;
 
+export const environmentType = strEnum(['live', 'test']);
+
+
 export type UserRole = keyof typeof roles;
 export type DealroomType = keyof typeof dealroomType;
 export type TimeRange = keyof typeof range;
@@ -121,3 +128,12 @@ export type StartupCategory = keyof typeof startupCategory;
 export type CompanyStage = keyof typeof companyStages;
 export type CustomerFocus = keyof typeof customerFocus;
 export type RaiseInstrument = keyof typeof raiseInstrument;
+export type EnvironmentType = keyof typeof environmentType;
+
+
+function strEnum<T extends string>(o: Array<T>): { [K in T]: K } {
+  return o.reduce((res, key) => {
+    res[key] = key;
+    return res;
+  }, Object.create(null));
+}

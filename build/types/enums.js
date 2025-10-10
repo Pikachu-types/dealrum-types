@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.timeRanges = exports.range = exports.accessPermissions = exports.fundingRounds = exports.raiseInstrument = exports.customerFocus = exports.dealroomType = exports.companyStages = exports.authProvider = exports.socialLinks = exports.startupCategory = exports.collections = void 0;
+exports.environmentType = exports.timeRanges = exports.range = exports.accessPermissions = exports.fundingRounds = exports.raiseInstrument = exports.customerFocus = exports.dealroomType = exports.companyStages = exports.authProvider = exports.socialLinks = exports.startupCategory = exports.collections = void 0;
 exports.collections = {
     dealroom: "dealroom",
     includer: "includer",
@@ -11,8 +11,12 @@ exports.collections = {
     companies: "companies",
     subscriptions: "subscriptions",
     team: "team",
+    pools: "pools",
     views: "views",
     pitchDecks: "decks",
+    investorForms: "investorForms",
+    formResponses: "formResponses",
+    contributionCol: (pool) => `pools/${pool}/contributions`,
 };
 exports.startupCategory = {
     software: "software",
@@ -100,4 +104,11 @@ const roles = {
     founder: "founder",
     both: "both"
 };
+exports.environmentType = strEnum(['live', 'test']);
+function strEnum(o) {
+    return o.reduce((res, key) => {
+        res[key] = key;
+        return res;
+    }, Object.create(null));
+}
 //# sourceMappingURL=enums.js.map

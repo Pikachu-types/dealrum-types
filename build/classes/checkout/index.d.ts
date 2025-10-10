@@ -9,7 +9,7 @@ export type Checkout = {
         amount: number;
         id: string;
         currency: string;
-        type: "gpt" | "slot" | "subscription";
+        type: "gpt" | "slot" | "subscription" | "contribution";
     };
     promo?: string | null;
     paidAt?: number | Date | string | null;
