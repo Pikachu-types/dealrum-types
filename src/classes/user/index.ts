@@ -41,6 +41,14 @@ export class UserModel extends Model<User> {
     return this.data.naming.first.length > 1 && this.data.naming.last.length > 1;
   }
 
+  public static createFullName(name: {
+    first: string;
+    last: string;
+    middle?: string;
+  }): string {
+    return `${name.first}${name.middle ? ` ${name.middle}` : ''} ${name.last}`;
+  }
+
   public get fullname(): string {
     const naming = this.data.naming;
     // Handle null/undefined input

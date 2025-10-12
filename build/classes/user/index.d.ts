@@ -35,5 +35,10 @@ export type User = {
 };
 export declare class UserModel extends Model<User> {
     get accountIsValid(): boolean;
+    static createFullName(name: {
+        first: string;
+        last: string;
+        middle?: string;
+    }): string;
     get fullname(): string;
 }

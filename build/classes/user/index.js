@@ -6,6 +6,9 @@ class UserModel extends model_1.Model {
     get accountIsValid() {
         return this.data.naming.first.length > 1 && this.data.naming.last.length > 1;
     }
+    static createFullName(name) {
+        return `${name.first}${name.middle ? ` ${name.middle}` : ''} ${name.last}`;
+    }
     get fullname() {
         var _a, _b;
         const naming = this.data.naming;
