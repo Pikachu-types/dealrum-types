@@ -10,6 +10,7 @@ export type User = {
   roles: {
     founder?: boolean | null;
     investor?: boolean | null;
+    tenant_admin?: boolean | null; // NEW: Tenant admin role
   },
   photoUrl: string | null | undefined;
   eid?: string;
@@ -33,6 +34,9 @@ export type User = {
   joined: Date | null | string | number;
   lastSeen?: Date | null | string | number;
   id: string;
+  // NEW: Multi-tenancy fields
+  tenant_id?: string | null; // Tenant this user belongs to
+  tenant_roles?: string[]; // Additional tenant-specific roles
 }
 
 export class UserModel extends Model<User> {
@@ -77,6 +81,79 @@ export class UserModel extends Model<User> {
 
     // Both names exist
     return `${firstName} ${lastName}`;
+  }
+
+  // NEW: Tenant-related methods
+  
+  /**
+   * Check if user belongs to a specific tenant
+   */
+  public belongsToTenant(tenantId: string): boolean {
+    return this.data.tenant_id === tenantId;
+  }
+  
+  /**
+   * Check if user is a tenant admin
+   */
+  public isTenantAdmin(): boolean {
+    return this.data.roles.tenant_admin === true;
+  }
+  
+  /**
+   * Check if user has a specific tenant role
+   */
+  public hasTenantRole(role: string): boolean {
+    return this.data.tenant_roles?.includes(role) || false;
+  }
+  
+  /**
+   * Add a tenant role to the user
+   */
+  public addTenantRole(role: string): void {
+    if (!this.data.tenant_roles) {
+      this.data.tenant_roles = [];
+    }
+    if (!this.data.tenant_roles.includes(role)) {
+      this.data.tenant_roles.push(role);
+    }
+  }
+  
+  /**
+   * Remove a tenant role from the user
+   */
+  public removeTenantRole(role: string): void {
+    if (this.data.tenant_roles) {
+      this.data.tenant_roles = this.data.tenant_roles.filter(r => r !== role);
+    }
+  }
+  
+  /**
+   * Assign user to a tenant
+   */
+  public assignToTenant(tenantId: string): void {
+    this.data.tenant_id = tenantId;
+  }
+  
+  /**
+   * Remove user from tenant
+   */
+  public removeFromTenant(): void {
+    this.data.tenant_id = null;
+    this.data.tenant_roles = [];
+  }
+  
+  /**
+   * Get user's tenant ID
+   */
+  public getTenantId(): string | null {
+    return this.data.tenant_id || null;
+  }
+  
+  /**
+   * Get user's tenant roles
+   */
+  public getTenantRoles(): string[] {
+    return this.data.tenant_roles || [];
   }
 }
  

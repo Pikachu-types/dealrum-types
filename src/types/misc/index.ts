@@ -1,3 +1,5 @@
+import { EnvironmentType, PricingPlanType } from "../enums";
+
 export const BUSINESS_INDUSTRIES: { value: string; label: string }[] = [
   { value: "restaurant", label: "Restaurant" },
   { value: "bar", label: "Bar" },
@@ -53,3 +55,58 @@ export type reactSelectOptionsType = {
   group: string;
   value: string;
 }
+
+// Tenant-related types
+export interface TenantBranding {
+  logo?: string | null;
+  primaryColor?: string;
+  secondaryColor?: string;
+  accentColor?: string;
+  favicon?: string;
+}
+
+export interface TenantLimits {
+  members: number;
+  customDomains: number;
+}
+
+export interface TenantBilling {
+  plan: PricingPlanType;
+  customerId?: string; // Stripe customer ID
+  subscriptionId?: string; // Stripe subscription ID
+  priceId?: string; // Stripe price ID
+  domain?: EnvironmentType;
+}
+
+export interface TenantSettings {
+  features: string[];
+  limits: TenantLimits;
+  customDomain?: string;
+  sslEnabled?: boolean;
+  custom404?: string;
+  customLanding?: string;
+  emailTemplates?: {
+    welcome?: string;
+    invitation?: string;
+    notification?: string;
+  };
+}
+
+export interface TenantDomain extends DocumentSchema {
+  tenantId: string;
+  domain: string;
+  sslEnabled: boolean;
+  custom404?: string;
+  customLanding?: string;
+  verified: boolean;
+  verificationToken?: string;
+}
+
+export type OptionSchema = {
+  label: string;
+  options: {
+    label: string;
+    group: string;
+    value: string;
+  }[];
+};

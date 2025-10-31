@@ -3,17 +3,24 @@ export const collections = {
   includer: "includer",
   users: "users",
   payments: "payments",
+  organizations: "organizations",
   questions: "questions",
   teams: "teams",
   companies: "companies",
   subscriptions: "subscriptions",
   team: "team",
+  deals: "deals",
   pools: "pools",
   views: "views",
   pitchDecks: "decks",
   investorForms: "investorForms",
   formResponses: "formResponses",
+  funneling: (tenant:string) => `tenants/${tenant}/funneling`,
+  funnelSubmissions: (tenant: string) => `tenants/${tenant}/funnel-submissions`,
   contributionCol: (pool: string) => `pools/${pool}/contributions`,
+  tenants: "tenants",
+  tenantDomains: "tenantDomains",
+  tenantSettings: "tenantSettings",
 } as const;
 
 export const startupCategory = {
@@ -100,6 +107,42 @@ const memberStatus = {
   pending: "pending",
 } as const;
 
+// Tenant-related enums
+export const tenantStatus = {
+  active: "active",
+  trial: "trial",
+  suspended: "suspended",
+  cancelled: "cancelled",
+} as const;
+
+export const tenantPlan = {
+  starter: "starter",
+  professional: "professional", 
+  enterprise: "enterprise",
+  custom: "custom",
+} as const;
+
+export const tenantBillingStatus = {
+  active: "active",
+  trialing: "trialing",
+  past_due: "past_due",
+  cancelled: "cancelled",
+  incomplete: "incomplete",
+} as const;
+
+export const tenantFeature = {
+  customDomain: "custom_domain",
+  sso: "sso",
+  apiAccess: "api_access",
+  advancedAnalytics: "advanced_analytics",
+  customBranding: "custom_branding",
+  unlimitedDealrooms: "unlimited_dealrooms",
+  prioritySupport: "priority_support",
+  dedicatedSupport: "dedicated_support",
+  customIntegrations: "custom_integrations",
+  mobileApp: "mobile_app",
+} as const;
+
 export const range = {
   day: "day",
   week: "week",
@@ -113,9 +156,21 @@ const roles = {
   both: "both"
 } as const;
 
+export const fieldTypes = strEnum(['text', 'textarea', 'select', 'multiselect', 'number', 'email', 'date', 'file', 'boolean', 'url', 'location']);
+
 export const environmentType = strEnum(['live', 'test']);
+export const pricingPlans = strEnum(['starter', 'professional']);
+export const dRoles = strEnum(['admin', 'analyst', 'partner']);
+
+export const tenantUseCase = strEnum(['syndicate', 'event', 'investor']);
+export const funnelStage = strEnum(['inbox', 'longlist', 'shortlist', 'closed', 'rejected']);
 
 
+export type FormFieldType = keyof typeof fieldTypes;
+export type FunnelStages = keyof typeof funnelStage;
+export type PricingPlanType = keyof typeof pricingPlans;
+export type TenantUsecase = keyof typeof tenantUseCase;
+export type DashboardRoles = keyof typeof dRoles;
 export type UserRole = keyof typeof roles;
 export type DealroomType = keyof typeof dealroomType;
 export type TimeRange = keyof typeof range;
@@ -129,6 +184,13 @@ export type CompanyStage = keyof typeof companyStages;
 export type CustomerFocus = keyof typeof customerFocus;
 export type RaiseInstrument = keyof typeof raiseInstrument;
 export type EnvironmentType = keyof typeof environmentType;
+
+// Tenant-related types
+export type TenantStatus = keyof typeof tenantStatus;
+export type TenantPlan = keyof typeof tenantPlan;
+export type TenantBillingStatus = keyof typeof tenantBillingStatus;
+export type TenantFeature = keyof typeof tenantFeature;
+
 
 
 function strEnum<T extends string>(o: Array<T>): { [K in T]: K } {

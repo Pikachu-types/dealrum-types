@@ -57,3 +57,6 @@ export function isValidEnumKey<T extends Record<string, string>>(
 export function normalize(text: string): string {
   return text.trim().toLowerCase();
 }
+
+// Export tenant utilities
+export * from './tenant';

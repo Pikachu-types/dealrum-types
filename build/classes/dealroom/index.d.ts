@@ -14,6 +14,7 @@ export type Dealroom = {
         email: string;
         currency: string;
     } | null;
+    tenant_id?: string | null;
     deactivated: boolean | null | undefined;
     investmentCount: string;
     minInvestment: number;
@@ -38,6 +39,26 @@ export type Dealroom = {
     teamEmails?: string[] | null | undefined;
 } & DocumentSchema;
 export declare class DealroomModel extends Model<Dealroom> {
+    /**
+     * Check if dealroom belongs to a specific tenant
+     */
+    belongsToTenant(tenantId: string): boolean;
+    /**
+     * Assign dealroom to a tenant
+     */
+    assignToTenant(tenantId: string): void;
+    /**
+     * Remove dealroom from tenant
+     */
+    removeFromTenant(): void;
+    /**
+     * Get dealroom's tenant ID
+     */
+    getTenantId(): string | null;
+    /**
+     * Check if dealroom is discoverable within tenant context
+     */
+    isDiscoverableInTenant(): boolean;
 }
 /**
  * Add company to dealroom
@@ -52,4 +73,5 @@ export type Includer = {
         source?: string | null;
     } | null;
     visibleToCompany: boolean;
+    tenant_id?: string | null;
 } & DocumentSchema;

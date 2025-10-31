@@ -3,6 +3,7 @@
 
 export * from './dealroom/index';
 export * from './company/index';
+export * from './organization/index';
 export * from './user/index';
 export * from './team/index';
 export * from './pools/index';
@@ -10,3 +11,7 @@ export * from './comments/index';
 export * from './funnel/index';
 export * from './checkout/index';
 export * from './subscription/index';
+export * from './tenant/index';
+export * from './deals/index';
+export * from './funneling/forms';
+export * from './funneling/submission';

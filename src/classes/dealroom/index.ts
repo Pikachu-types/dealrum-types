@@ -17,6 +17,8 @@ export type Dealroom = {
     currency: string;
   } | null;
 
+  // NEW: Multi-tenancy field
+  tenant_id?: string | null; // Tenant this dealroom belongs to
 
   deactivated: boolean | null | undefined; // Is this room deactivated?
 
@@ -54,6 +56,41 @@ export type Dealroom = {
 } & DocumentSchema;
 
 export class DealroomModel extends Model<Dealroom> {
+  
+  /**
+   * Check if dealroom belongs to a specific tenant
+   */
+  public belongsToTenant(tenantId: string): boolean {
+    return this.data.tenant_id === tenantId;
+  }
+  
+  /**
+   * Assign dealroom to a tenant
+   */
+  public assignToTenant(tenantId: string): void {
+    this.data.tenant_id = tenantId;
+  }
+  
+  /**
+   * Remove dealroom from tenant
+   */
+  public removeFromTenant(): void {
+    this.data.tenant_id = null;
+  }
+  
+  /**
+   * Get dealroom's tenant ID
+   */
+  public getTenantId(): string | null {
+    return this.data.tenant_id || null;
+  }
+  
+  /**
+   * Check if dealroom is discoverable within tenant context
+   */
+  public isDiscoverableInTenant(): boolean {
+    return this.data.discoverable && this.data.tenant_id !== null;
+  }
 }
 
 /**
@@ -69,4 +106,6 @@ export type Includer = {
     source?: string | null
   } | null;
   visibleToCompany: boolean;
+  // NEW: Multi-tenancy field
+  tenant_id?: string | null; // Tenant this includer belongs to
 } & DocumentSchema;

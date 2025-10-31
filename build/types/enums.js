@@ -1,22 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.environmentType = exports.timeRanges = exports.range = exports.accessPermissions = exports.fundingRounds = exports.raiseInstrument = exports.customerFocus = exports.dealroomType = exports.companyStages = exports.authProvider = exports.socialLinks = exports.startupCategory = exports.collections = void 0;
+exports.funnelStage = exports.tenantUseCase = exports.dRoles = exports.pricingPlans = exports.environmentType = exports.fieldTypes = exports.timeRanges = exports.range = exports.tenantFeature = exports.tenantBillingStatus = exports.tenantPlan = exports.tenantStatus = exports.accessPermissions = exports.fundingRounds = exports.raiseInstrument = exports.customerFocus = exports.dealroomType = exports.companyStages = exports.authProvider = exports.socialLinks = exports.startupCategory = exports.collections = void 0;
 exports.collections = {
     dealroom: "dealroom",
     includer: "includer",
     users: "users",
     payments: "payments",
+    organizations: "organizations",
     questions: "questions",
     teams: "teams",
     companies: "companies",
     subscriptions: "subscriptions",
     team: "team",
+    deals: "deals",
     pools: "pools",
     views: "views",
     pitchDecks: "decks",
     investorForms: "investorForms",
     formResponses: "formResponses",
+    funneling: (tenant) => `tenants/${tenant}/funneling`,
+    funnelSubmissions: (tenant) => `tenants/${tenant}/funnel-submissions`,
     contributionCol: (pool) => `pools/${pool}/contributions`,
+    tenants: "tenants",
+    tenantDomains: "tenantDomains",
+    tenantSettings: "tenantSettings",
 };
 exports.startupCategory = {
     software: "software",
@@ -93,6 +100,38 @@ const memberStatus = {
     joined: "joined",
     pending: "pending",
 };
+// Tenant-related enums
+exports.tenantStatus = {
+    active: "active",
+    trial: "trial",
+    suspended: "suspended",
+    cancelled: "cancelled",
+};
+exports.tenantPlan = {
+    starter: "starter",
+    professional: "professional",
+    enterprise: "enterprise",
+    custom: "custom",
+};
+exports.tenantBillingStatus = {
+    active: "active",
+    trialing: "trialing",
+    past_due: "past_due",
+    cancelled: "cancelled",
+    incomplete: "incomplete",
+};
+exports.tenantFeature = {
+    customDomain: "custom_domain",
+    sso: "sso",
+    apiAccess: "api_access",
+    advancedAnalytics: "advanced_analytics",
+    customBranding: "custom_branding",
+    unlimitedDealrooms: "unlimited_dealrooms",
+    prioritySupport: "priority_support",
+    dedicatedSupport: "dedicated_support",
+    customIntegrations: "custom_integrations",
+    mobileApp: "mobile_app",
+};
 exports.range = {
     day: "day",
     week: "week",
@@ -104,7 +143,12 @@ const roles = {
     founder: "founder",
     both: "both"
 };
+exports.fieldTypes = strEnum(['text', 'textarea', 'select', 'multiselect', 'number', 'email', 'date', 'file', 'boolean', 'url', 'location']);
 exports.environmentType = strEnum(['live', 'test']);
+exports.pricingPlans = strEnum(['starter', 'professional']);
+exports.dRoles = strEnum(['admin', 'analyst', 'partner']);
+exports.tenantUseCase = strEnum(['syndicate', 'event', 'investor']);
+exports.funnelStage = strEnum(['inbox', 'longlist', 'shortlist', 'closed', 'rejected']);
 function strEnum(o) {
     return o.reduce((res, key) => {
         res[key] = key;
