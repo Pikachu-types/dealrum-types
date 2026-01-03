@@ -5,6 +5,7 @@ export declare const collections: {
     readonly payments: "payments";
     readonly organizations: "organizations";
     readonly questions: "questions";
+    readonly orgRequests: "orgRequests";
     readonly teams: "teams";
     readonly companies: "companies";
     readonly subscriptions: "subscriptions";
@@ -38,6 +39,7 @@ export declare const authProvider: {
     readonly email: "Email address";
     readonly pasby: "pasby e-ID (National Identification Number)";
     readonly pasbyMail: "pasby and email authentication";
+    readonly custom: "Wildcard verifiable authenticator";
 };
 export declare const companyStages: {
     readonly idea: "Idea stage";

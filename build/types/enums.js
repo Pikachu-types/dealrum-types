@@ -8,6 +8,7 @@ exports.collections = {
     payments: "payments",
     organizations: "organizations",
     questions: "questions",
+    orgRequests: "orgRequests",
     teams: "teams",
     companies: "companies",
     subscriptions: "subscriptions",
@@ -40,7 +41,8 @@ exports.socialLinks = {
 exports.authProvider = {
     email: "Email address",
     pasby: "pasby e-ID (National Identification Number)",
-    pasbyMail: "pasby and email authentication"
+    pasbyMail: "pasby and email authentication",
+    custom: "Wildcard verifiable authenticator",
 };
 exports.companyStages = {
     idea: "Idea stage",

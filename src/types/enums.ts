@@ -5,6 +5,7 @@ export const collections = {
   payments: "payments",
   organizations: "organizations",
   questions: "questions",
+  orgRequests: "orgRequests",
   teams: "teams",
   companies: "companies",
   subscriptions: "subscriptions",
@@ -39,7 +40,8 @@ export const socialLinks = {
 export const authProvider = {
   email: "Email address",
   pasby: "pasby e-ID (National Identification Number)",
-  pasbyMail: "pasby and email authentication"
+  pasbyMail: "pasby and email authentication",
+  custom: "Wildcard verifiable authenticator",
 } as const;
 
 export const companyStages = {

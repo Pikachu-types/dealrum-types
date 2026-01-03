@@ -141,5 +141,8 @@ export class TenantModel extends Model<Tenant> {
     const customDomains = this.getCustomDomains();
     return customDomains.length < this.data.settings.limits.customDomains;
   }
-  
+ 
+  public userRole(uid: string): DashboardRoles | undefined {
+    return this.schema.members[uid].role;
+  }
 }

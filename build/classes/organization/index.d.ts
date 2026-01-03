@@ -16,3 +16,7 @@ export type Organization = {
     };
     aggregatedData: Record<string, unknown>;
 } & DocumentSchema;
+export type OrgRequest = {
+    org: string;
+    uid: string;
+} & DocumentSchema;

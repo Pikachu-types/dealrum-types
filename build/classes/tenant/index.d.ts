@@ -76,4 +76,5 @@ export declare class TenantModel extends Model<Tenant> {
      * Check if tenant can add more custom domains
      */
     canAddCustomDomain(): boolean;
+    userRole(uid: string): DashboardRoles | undefined;
 }

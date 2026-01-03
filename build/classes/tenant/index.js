@@ -89,6 +89,9 @@ class TenantModel extends model_1.Model {
         const customDomains = this.getCustomDomains();
         return customDomains.length < this.data.settings.limits.customDomains;
     }
+    userRole(uid) {
+        return this.schema.members[uid].role;
+    }
 }
 exports.TenantModel = TenantModel;
 //# sourceMappingURL=index.js.map
