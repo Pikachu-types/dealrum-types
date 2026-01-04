@@ -92,6 +92,9 @@ class TenantModel extends model_1.Model {
     userRole(uid) {
         return this.schema.members[uid].role;
     }
+    user(uid) {
+        return this.schema.members[uid];
+    }
 }
 exports.TenantModel = TenantModel;
 //# sourceMappingURL=index.js.map

@@ -18,6 +18,7 @@ export type Tenant = {
         [key: string]: {
             role: DashboardRoles;
             uid: string;
+            iat: Date | null | string | number;
         };
     };
     usecase: TenantUsecase;
@@ -77,4 +78,9 @@ export declare class TenantModel extends Model<Tenant> {
      */
     canAddCustomDomain(): boolean;
     userRole(uid: string): DashboardRoles | undefined;
+    user(uid: string): {
+        role: DashboardRoles;
+        uid: string;
+        iat: Date | null | string | number;
+    };
 }

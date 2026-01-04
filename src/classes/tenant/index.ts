@@ -34,6 +34,7 @@ export type Tenant = {
     [key: string]: {
       role: DashboardRoles;
       uid: string;
+      iat: Date | null | string | number;
     },
   };
 
@@ -144,5 +145,9 @@ export class TenantModel extends Model<Tenant> {
  
   public userRole(uid: string): DashboardRoles | undefined {
     return this.schema.members[uid].role;
+  }
+  
+  public user(uid: string){
+    return this.schema.members[uid];
   }
 }
