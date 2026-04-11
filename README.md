@@ -1,87 +1,93 @@
-# Console Shared Types
+# `@pikachu/dealrum-types`
 
-A TypeScript package containing shared types and classes for console applications.
+Shared **TypeScript types**, **constants**, and small **runtime helpers** for the [Dealrum](https://www.dealrum.com) app: Firestore-backed tenants, workspace licensing, funnel definitions, and pipeline submissions.
 
-## Project Structure
+This package is consumed by the main Dealrum Next.js repo via a workspace dependency (`"file:./packages/dealrum-types"`). The entry point is a **single module**: `src/index.ts` (also exposed as `types` / `main` in `package.json` for bundlers that resolve TypeScript directly).
 
-```
-console-shared-types/
-├── src/
-│   ├── types/          # Type definitions
-│   │   └── index.ts    # Types barrel export
-│   ├── classes/        # Class definitions
-│   │   └── index.ts    # Classes barrel export
-│   └── index.ts        # Main entry point
-├── build/               # Compiled JavaScript (generated)
-├── tsconfig.json       # TypeScript configuration
-├── package.json        # Package configuration
-└── README.md          # This file
+---
+
+## Install and build
+
+From the **repository root** (recommended):
+
+```bash
+npm install
 ```
 
-## Usage
+From **this package directory**:
 
-### Development
-
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
-
-2. Build the project:
-   ```bash
-   npm run build
-   ```
-
-3. Watch for changes during development:
-   ```bash
-   npm run dev
-   ```
-
-### Adding Types
-
-Create new type files in the `src/types/` directory and export them from `src/types/index.ts`:
-
-```typescript
-// src/types/example-types.ts
-export interface ExampleType {
-  id: string;
-  name: string;
-}
-
-// src/types/index.ts
-export * from './example-types';
+```bash
+npm run build
 ```
 
-### Adding Classes
+`npm run build` runs `tsc` and emits declarations (and JS) under **`dist/`**. The host app typically imports from **`./src/index.ts`** as configured in `package.json`, so a local build is optional unless you publish or run tools that expect `dist/`.
 
-Create new class files in the `src/classes/` directory and export them from `src/classes/index.ts`:
+**Peer dependency:** `zod` (^3.25) — the host app provides it for shared validation patterns alongside these types.
 
-```typescript
-// src/classes/example-class.ts
-export class ExampleClass {
-  constructor(private name: string) {}
-  
-  getName(): string {
-    return this.name;
-  }
-}
+---
 
-// src/classes/index.ts
-export * from './example-class';
-```
+## Firestore layout (`collections`)
 
-## Building
+| Export | Path / pattern |
+| --- | --- |
+| `collections.users` | `users` |
+| `collections.tenants` | `tenants` |
+| `collections.funnels(tenantId)` | `tenants/{tenantId}/funnels` |
+| `collections.funnelSubmissions(tenantId)` | `tenants/{tenantId}/funnelSubmissions` |
 
-The project uses TypeScript's compiler to generate JavaScript files and type definitions in the `build/` directory. The build process:
+---
 
-1. Cleans the `build/` directory
-2. Compiles TypeScript to JavaScript
-3. Generates type definition files (`.d.ts`)
+## Workspace licensing
 
-## Exports
+Types used with Stripe **lifetime** workspace checkout and server-side quota logic:
 
-The package exports all types and classes through the main entry point at `src/index.ts`. When importing from this package, you can access all exported types and classes:
+- **`WorkspaceLicenseTier`**: `"core" \| "scale" \| "operator"`.
+- **`WorkspaceLicense`**: `tier`, `maxWorkspaces`, `purchasedAt`, optional Stripe ids, and **`additionalFunnelSlots`** (purchased **+1 active funnel** capacity per unit; enforced in app code with tier baselines).
 
-```typescript
-import { ExampleType, ExampleClass } from 'akub-types';
-``` 
+Optional **`User.workspaceLicense`** documents the signed-in owner’s purchased license (invited workspace members do not require their own license).
+
+---
+
+## Tenants and members
+
+- **`Tenant`**: workspace identity (`slug`, `name`, `owner`, `members`, branding, `domains` / `configuration` for custom host, `description`, `settings`, etc.).
+- **`TenantModel`**: `fromJson`, **`domain(host)`** (custom domain vs `{slug}.{host}`), **`userRole(uid)`**.
+- **`TenantMember`**, **`DashboardRoles`**.
+
+---
+
+## Funnels and intake
+
+- **`FunnelConfig`**: funnel document (`sections`, optional `name` / `description` / **`metadata`**, **`status`** `active \| archived`, **`isPrimary`**). Only **active** funnels count toward the **owner’s** cross-workspace active-funnel quota in the app.
+- **`FunnelSection`**, **`FunnelField`**, **`FunnelFieldType`**, **`fieldTypes`** (canonical field type keys for editors and Zod).
+- **`FunnelSubmission`**: applicant payload snapshot, **`funnelConfigId`**, **`stage`** (see **`FunnelStages`**), `status`, optional files and notes.
+- **`FunnelSubmissionStatus`**, **`FunnelStages`** (`inbox`, `longlist`, `shortlist`, `closed`, `rejected`).
+
+---
+
+## Users
+
+- **`User`**: profile, **`naming`**, **`security`**, optional **`workspaceLicense`**.
+- **`AuthProviderKind`**.
+- **`UserModel`**: `fromJson`, **`fullname`** getter.
+
+---
+
+## Other exports
+
+- **`Company`**, **`OptionSchema`** — shared shapes where the product still references them.
+- **`fundingRounds`**, **`raiseInstrument`** — small labeled option lists for forms.
+
+---
+
+## Adding or changing types
+
+1. Edit **`src/index.ts`** (keep exports explicit and documented with short JSDoc where behavior is non-obvious).
+2. Run **`npm run build`** here to confirm `tsc` passes.
+3. In the host app, fix any follow-on imports or server rules; keep Firestore rules and Admin paths aligned with **`collections`**.
+
+---
+
+## Repository
+
+Package metadata and links live in **`package.json`** (`repository`, `bugs`, `homepage`). When this folder is vendored inside the monorepo, treat this README as the **source of truth** for what the types package guarantees; the root app **`README.md`** describes end-to-end product behavior.
