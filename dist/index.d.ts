@@ -157,6 +157,13 @@ export interface FunnelConfig {
     metadata?: Record<string, string>;
     /** When true, this funnel powers `/apply` when no `funnelId` query is provided. */
     isPrimary?: boolean;
+    /**
+     * Public hostname for this funnel only (e.g. `apply.partner.com`).
+     * Lowercase; registered on Vercel via API; DNS must CNAME to `cname.vercel-dns.com`.
+     */
+    customDomain?: string;
+    /** Set when Vercel reports the project domain is verified; required for public routing on this host. */
+    domainVerified?: boolean;
     sections: Record<string, FunnelSection>;
 }
 export type FunnelSubmissionStatus = "draft" | "submitted" | "reviewing" | "accepted" | "rejected" | "withdrawn";

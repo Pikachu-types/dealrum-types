@@ -58,7 +58,7 @@ Optional **`User.workspaceLicense`** documents the signed-in owner’s purchased
 
 ## Funnels and intake
 
-- **`FunnelConfig`**: funnel document (`sections`, optional `name` / `description` / **`metadata`**, **`status`** `active \| archived`, **`isPrimary`**). Only **active** funnels count toward the **owner’s** cross-workspace active-funnel quota in the app.
+- **`FunnelConfig`**: funnel document (`sections`, optional `name` / `description` / **`metadata`**, **`status`** `active \| archived`, **`isPrimary`**, optional **`customDomain`** / **`domainVerified`** for a public intake hostname registered on Vercel). Only **active** funnels count toward the **owner’s** cross-workspace active-funnel quota in the app.
 - **`FunnelSection`**, **`FunnelField`**, **`FunnelFieldType`**, **`fieldTypes`** (canonical field type keys for editors and Zod).
 - **`FunnelSubmission`**: applicant payload snapshot, **`funnelConfigId`**, **`stage`** (see **`FunnelStages`**), `status`, optional files and notes.
 - **`FunnelSubmissionStatus`**, **`FunnelStages`** (`inbox`, `longlist`, `shortlist`, `closed`, `rejected`).
